@@ -31,7 +31,7 @@ current_datetime = datetime.datetime.now()
 current_date = current_datetime.date()
 current_time = current_datetime.time()
 f_data = current_date.strftime("%d-%m-%Y")
-f_time = current_time.strftime("%H:%m:%S")
+f_time = current_time.strftime("%H:%M:%S")
 
 
 #Output dos Pings
