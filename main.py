@@ -78,17 +78,17 @@ def all_pings():
         pingados = pingados.stdout
         pingations.append(f"\n{pingados}\n")
 
+    
     try:
-        with open("relatorio_networkchecker.txt", "a", encoding="latin-1") as relat:
+        with open(f"Relatorio({usertag})_Networkchecker.txt", "a", encoding="latin-1") as relat:
             relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
     except UnicodeEncodeError:
-        with open("relatorio_networkchecker.txt", "a", encoding="utf-8") as relat:
+        with open(f"Relatorio({usertag})_Networkchecker.txt", "a", encoding="utf-8") as relat:
             relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
 
 
 
-
-
+#Tela - GUI
 screen = Tk()
 screen.title("Pinpoint - Network Checker")
 screen.geometry("700x600")
@@ -175,4 +175,5 @@ diagnose_button.place(x=280, y=500)
 
 
 screen.mainloop()
+
 
