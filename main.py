@@ -10,6 +10,7 @@ import sys
 import time
 import webbrowser
 
+print("NÃO FECHE ESTA JANELA!\n\nOs testes estão sendo rodados em background!\nDepois que o relatório for salvo, o programa pode ser encerrado.")
 
 #Cores do Programa
 VERDE = "#47B448"
@@ -203,8 +204,6 @@ last_dreamer.place(x=565, y=562)
 
 
 screen.mainloop()
-
-
 
 
 
