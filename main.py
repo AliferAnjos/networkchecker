@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import messagebox, filedialog, ttk
+from tkinter import messagebox, filedialog
 import datetime
 import os
 import psutil
@@ -62,7 +62,6 @@ foto = os.path.join(base_path, 'images', 'logo.png')
 icone = os.path.join(base_path, 'images', 'logo.ico')
 
 
-
 screen = Tk()
 screen.title("Pinpoint - Network Checker")
 screen.geometry("700x600")
@@ -114,6 +113,7 @@ net_label.place(x=318, y=10)
 net_interfaces = Text(tela_um, width=50, height=25)
 net_interfaces.place(x=225, y=38)
 
+
 logo = PhotoImage(file=foto).subsample(1, 1)
 
 
@@ -130,8 +130,8 @@ def diagnosticar():
     net_interfaces.delete(1.0, END)
     net_interfaces.insert(END, output_wlan)
 
-    messagebox.showwarning("Atenção", "Não feche Network Checker e janela CMD.\nOs testes demoram cerca de 2:45 minutos para serem finalizados.\nApós o término, uma janela para salvar o arquivo aparecerá. Salve e direcione ao seu TI para avaliação.\nCase o app trave, aguarde o programe responder.Após salvar o arquivo, o programa pode ser encerrado.\nApós leitura, essa janela de aviso pode ser fechada.")
-  
+    messagebox.showwarning("ATENÇÃO: - Após leitura, este aviso pode ser fechado!", """1 - Mantenha Network Checker e janela CMD (Tela Preta) abertos durante o teste.\n2- Caso o programa trave, aguarde que voltará a responder.\n3- Os testes demoram cerca de 2:30 minutos para serem finalizados.\n4- Após o término, uma janela para salvar o arquivo aparecerá.\n5- Salve o arquivo sem renomear!\n6- Direcione o relatório ao seu TI para avaliação.\n7- Após salvar o arquivo, encerre o programa.\n""")
+
     
     try:
         dft_g = subprocess.check_output("ipconfig | findstr \"Default Gateway\"", shell=True, encoding=encoding_geral)
@@ -184,10 +184,23 @@ diagnose_button.place(x=268, y=470)
 def merchan():
     webbrowser.open("www.pinpoint.com.br")
 
-pinpoint = Button(image=logo, width=48, height=52, bg=AZUL, highlightthickness=0, command=merchan)
+pinpoint = Button(relief=FLAT, image=logo, width=48, height=52, bg=AZUL, highlightthickness=0, command=merchan)
 pinpoint.place(x=10, y=405)
+
+def lastdreamer():
+    webbrowser.open("lastdreamer.com")
+
+
+devop = Label(screen, height=1, bg=AZUL, fg="#ffffff", highlightthickness=0, text="DESENVOLVIDO POR:", font=("Consolas", 8 ))
+devop.place(x=460, y=563)
+
+
+last_dreamer = Button(screen, relief=FLAT, height=1, command=lastdreamer, bg=AZUL, fg="#ffffff", highlightthickness=0, text="LASTDREAMER.COM", font=("Consolas", 8 ))
+last_dreamer.place(x=565, y=562)
 
 
 screen.mainloop()
+
+
 
 
