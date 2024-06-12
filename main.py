@@ -22,7 +22,7 @@ cpu = psutil.cpu_percent(interval=1)
 memoria = psutil.virtual_memory()
 memoria_p = memoria.percent
 
-#Nome do Usuária
+#Nome do Usuário
 usertag = str(os.getlogin())
 
 #Hostname da Máquina
@@ -130,7 +130,7 @@ def diagnosticar():
     net_interfaces.delete(1.0, END)
     net_interfaces.insert(END, output_wlan)
 
-    messagebox.showwarning("ATENÇÃO: - Após leitura, este aviso pode ser fechado!", """1 - Mantenha Network Checker e janela CMD (Tela Preta) abertos durante o teste.\n2- Caso o programa trave, aguarde que voltará a responder.\n3- Os testes demoram cerca de 2:30 minutos para serem finalizados.\n4- Após o término, uma janela para salvar o arquivo aparecerá.\n5- Salve o arquivo sem renomear!\n6- Direcione o relatório ao seu TI para avaliação.\n7- Após salvar o arquivo, encerre o programa.\n""")
+    messagebox.showwarning("ATENÇÃO: - Após leitura, este aviso pode ser fechado!", """1 - Mantenha Network Checker e janela CMD (Tela Preta) abertos durante o teste.\n2- Caso o programa trave, aguarde que voltará a responder.\n3- Os testes demoram cerca de 2:35 minutos para serem finalizados.\n4- Após o término, uma janela para salvar o arquivo aparecerá.\n5- Salve o arquivo sem renomear!\n6- Direcione o relatório ao seu TI para avaliação.\n7- Após salvar o arquivo, encerre o programa.\n""")
 
     
     try:
@@ -165,17 +165,20 @@ def diagnosticar():
         pingations.append(f"\n{pingados}\n")
 
 
-    time.sleep(5)
-    caminho =  filedialog.askdirectory(title="Escolha Onde Deseja Salvar o Relatório:")
-    if caminho:
-        file_path = os.path.join(caminho, f"Relatorio({usertag})_NetworkChecker.txt")
-    try:
-        with open(file_path, "w", encoding="utf-8") as relat:
-            relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nIP de Origem:\n{ipv4}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 Sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
-    except UnicodeEncodeError:
-        with open(file_path, "w", encoding=encoding_geral) as relat:
-            relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nIP de Origem:\n{ipv4}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 Sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
-    
+    time.sleep(1)
+    while True:
+
+        caminho =  filedialog.askdirectory(title="Onde Deseja Salvar o Relatório?")
+        if caminho:
+            file_path = os.path.join(caminho, f"Relatorio({usertag})_NetworkChecker.txt")
+            try:
+                with open(file_path, "w", encoding="utf-8") as relat:
+                    relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nIP de Origem:\n{ipv4}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 Sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
+                    break
+            except UnicodeEncodeError:
+                with open(file_path, "w", encoding=encoding_geral) as relat:
+                    relat.write(f"""Usuario: {usertag}\nHostname: {hostname}\nIP de Origem:\n{ipv4}\nCPU %: {cpu}\nMemoria %: {memoria_p}\nData do Teste: {f_data}\nHora do Teste: {f_time}\n\nInfo de WLAN:\n{output_wlan}\nPing para o Default Gateway:\n{pingations[0]}\n\nPing para os 5 Sites:\n\n{pingations[1]}\n\n{pingations[2]}\n\n{pingations[3]}\n\n{pingations[4]}\n\n{pingations[5]}\n\n""")
+                    break
 
 diagnose_button = Button(tela_um, bg=AZUL, fg="#ffffff", text="DIAGNOSTICAR", width=15, highlightthickness=0, font=("Consolas", 10), command=diagnosticar) #all_pings()))
 diagnose_button.place(x=268, y=470)
@@ -200,6 +203,7 @@ last_dreamer.place(x=565, y=562)
 
 
 screen.mainloop()
+
 
 
 
